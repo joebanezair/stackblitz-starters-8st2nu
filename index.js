@@ -1,12 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
 // Replace with your actual credentials
-const mongoUri =
-  'mongodb://myUserAdmin:myStrongPassword@72.61.114.158:27017/mern_sample?authSource=admin';
+const mongoUri = process.env.MONGO_URI;
 
 mongoose
   .connect(mongoUri)
@@ -14,7 +14,10 @@ mongoose
     console.log('✅ MongoDB Connected');
 
     // Automatically insert some sample data on server start
-    insertSampleData();
+    // insertSampleData();
+
+    //reading data
+    readDataSampleData();
   })
   .catch((err) => console.error('❌ MongoDB connection error:', err));
 
@@ -36,6 +39,17 @@ async function insertSampleData() {
     console.log(allItems);
   } catch (err) {
     console.error('❌ Error inserting sample data:', err);
+  }
+}
+
+//Read Data
+async function readDataSampleData(){
+  try{
+    const readItems = await Item.find();
+    console.log("Readed Items : ");
+    console.log(readItems);
+  }catch(err){
+    console.error("There are error reading the data : ". err)
   }
 }
 

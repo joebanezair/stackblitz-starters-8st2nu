@@ -1,0 +1,3 @@
+When creating a Data, it doesn't load to the page unless it manually reloads the page. 
+Need authentication
+Need to post images
